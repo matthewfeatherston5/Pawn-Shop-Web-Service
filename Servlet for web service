@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<webb-app>
+<web-app>
 
 <servlet>
  <servlet-name>RestfulContainer</servlet-name>
@@ -18,4 +18,4 @@
   <servlet-name>RestfulContainer</servlet-name>
   <url-pattern>/resources/*</url-pattern>
  </servlet-mapping>
-</webb-app>
+</web-app>

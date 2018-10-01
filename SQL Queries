@@ -1,0 +1,34 @@
+//creating DB and Table
+create database pawnTicketDB;
+
+
+
+use pawnTicketDB;
+
+
+
+create table PawnTicket
+
+(
+		
+	ticketID varchar (100),
+		
+	primary key (ticketID),
+        
+	item varchar(100)
+);
+
+);
+
+//Inserting values into PawnTicket Table
+insert into PawnTicket (ticketID, item)
+	
+	values ('item1', 'bike');
+
+insert into PawnTicket(ticketID, item) 
+	
+	values('item2', 'tv');
+
+insert into PawnTicket(ticketID, item)
+	
+	values('item3', 'computer');

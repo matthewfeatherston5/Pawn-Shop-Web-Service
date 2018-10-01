@@ -1,0 +1,24 @@
+<title>Customer's Pawn Ticket Page</title>
+</head>
+
+<style>
+body
+{
+	baackground-color:#00FF00
+}
+</style>
+
+<body>
+<center><h1>Customer Pawn Ticket Page</h1></center>
+<!--<ht style="background-color:MediumSeaGreen;">Customer Page</h1>-->
+<!--<h2>Type Ticket ID here</h2>-->
+<form>
+	<fieldset>
+		Type Pawn Ticket ID Here:<br>
+		<input type="text" name="ticketID"><br>
+	</fieldset>
+</form>
+</body>
+
+
+</html>

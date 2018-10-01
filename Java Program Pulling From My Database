@@ -1,0 +1,50 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DatabaseDemo
+{
+	public static void main(String[]args)throws SQLException, ClassNotFoundException
+	{
+		System.out.println("Testing DB...Starting!!!");
+		
+
+		//Protocol String "<protocol>://<domainName>:<portNumber>/<databaseName>
+		String connectStr ="jdbc:mysql://localhost:3306/pawnticketdb";
+
+		//DB username
+		String username = "root";
+
+		//database password
+		String password="password";
+
+		//Driver for Java class to connect to pawnticketdb
+		String driver = "com.mysql.jdbc.Driver";
+
+		//Creates a connection object for pawnticketdb
+		Connection con = DriverManager.getConnection(connectStr, username, password);
+
+		//Creating  a statement object to be executed on pawnticketdb
+		Statement stmt = con.createStatement();
+
+		//Do a bd query
+		ResultSet rs = stmt.executeQuery("SELECT ticketID,item FROM pawnticket");
+
+		//Showing results from pawnticketdb
+		String result ="";
+
+		while(rs.next())
+		{
+			String theID       = rs.getString("ticketID");
+			String theItemName = rs.getString("item");
+			result += "ID: " + theID + "Item: " + theItemName;
+		}
+		
+		//Show Results from DB
+		System.out.println("Results From DB are: \n\n"+ result);
+
+		System.out.println("Testing DB is done..GOodbye :)");
+	}
+} 

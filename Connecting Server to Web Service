@@ -1,0 +1,24 @@
+package com.pawnshop;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+@Path("ws1")
+public class PawnShopTest1
+{
+	@Path("/test1")
+	@GET 
+	@Produces("text/plain")
+	public String getMessage1()
+	{
+		return"Pawn Shop getMessage1 works!!! :)";
+	}
+
+	@Path("/test2")
+	@GET
+	@Produces("text/plain")
+	public String getMessage2()
+	{
+		return "Pawn shop getMessage2 works!! ;)";
+	}
+}

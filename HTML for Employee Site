@@ -1,0 +1,29 @@
+
+<html>
+
+<head>
+<title>Empolyee's Pawn Ticket Page</title>
+</head>
+
+<style>
+body
+{
+	background-color:#00FF00
+}
+</style>
+
+<body>
+<center><h1>Empolyee Pawn Ticket Page</h1></center>
+<!--<ht style="background-color:MediumSeaGreen;">Employee Page</h1>-->
+<!--<h2>Type Ticket ID here</h2>-->
+<form>
+  <fieldset>
+	<legend>Guest Pawn Tickt ID</legend>
+	Type Guest's Pawn Ticket ID Here:<br>
+	<input type="text" name="ticketID"><br>
+  </fieldset>
+</form>
+</body>
+
+
+</html>

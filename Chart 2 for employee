@@ -1,8 +1,10 @@
 
+<h2>Pawn Shop Empolyee Page</h2>
+
 <div id="getTicket">
 <input type="text" id="t_ticket" value="Type Pawn Ticket Id Here"/>
 <button id"btnGetTicket">Click to Display Guest Pawn Ticket Info In Chart Below</button>
-<!--<p id="p_getTicket"> Ticket Info Goes in Chart Below</p>-->
+<p id="p_getTicket"> Ticket Info Goes in Chart Below (used for debugging)</p>
 </div>
 
 
@@ -27,3 +29,24 @@
   </tr>
 </tbody>
 </table>
+
+<script>
+$(document).reday( function(){
+alert("running script");
+
+$("#btnOneId").click(function() {
+	alert("clecked");
+    var inputId = document.getElementById("t_ticket").value;
+    vae theUrl="Name of the url to get ticket by id"+ inputId;
+    $.ajax( {
+    	url: theUrl
+        type:"GET",
+        dataType:"text",
+        success: function (result){
+        alert("succes");
+        $("#p_getTicket").html(result); },
+        error:function(xhr){
+        alert("error");
+        $("#p_getTicket").html("Error:" + xhr.status+" "+xhr.statusText);}
+        });
+        });

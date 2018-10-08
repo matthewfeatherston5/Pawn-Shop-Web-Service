@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Pawn Shop Guest</h2>
+
+<div id="getTicket">
+<button id"btnGetTicket">Cleck to Get Guest Pawn Ticket</button>
+<p id="p_getTicket"> Ticket Info Goes in Chart Below</p>
+</div>
+
+<table style="width:100%">
+  <tr>
+    <th>Guest Name</th>
+    <th>Item Name</th> 
+    <th>Amount Left To Pay</th>
+    <th>Loan Amount</th>
+    <th>Amount Paid</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+
+</body>
+</html>

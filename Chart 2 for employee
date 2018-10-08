@@ -1,8 +1,8 @@
-<h2>Pawn Shop Guest</h2>
 
 <div id="getTicket">
-<button id"btnGetTicket">Cleck to Get Guest Pawn Ticket</button>
-<p id="p_getTicket"> Ticket Info Goes in Chart Below</p>
+<input type="text" id="t_ticket" value="Type Pawn Ticket Id Here"/>
+<button id"btnGetTicket">Click to Display Guest Pawn Ticket Info In Chart Below</button>
+<!--<p id="p_getTicket"> Ticket Info Goes in Chart Below</p>-->
 </div>
 
 

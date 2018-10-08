@@ -1,0 +1,29 @@
+<h2>Pawn Shop Guest</h2>
+
+<div id="getTicket">
+<button id"btnGetTicket">Cleck to Get Guest Pawn Ticket</button>
+<p id="p_getTicket"> Ticket Info Goes in Chart Below</p>
+</div>
+
+
+
+<table width="100%" class="table table-bordered table-hover" id="_addFiveTable">
+<thead>
+  <tr>
+    <th>Guest Name</th>
+    <th>Item Name</th> 
+    <th>Amount Left To Pay</th>
+    <th>Loan Amount</th>
+    <th>Amount Paid</th>
+  </tr>
+</thead>
+<tbody>  
+  <tr>
+    <td contenteditable="true">Editable</td>
+    <td contenteditable="true">&nbsp;</td>
+    <td contenteditable="true">&nbsp;</td>
+    <td contenteditable="true">&nbsp;</td>
+    <td contenteditable="true">&nbsp;</td>
+  </tr>
+</tbody>
+</table>

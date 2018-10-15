@@ -1,0 +1,76 @@
+<h2>Pawn Shop Empolyee Page</h2>
+
+
+<div id="retrieveOneId">
+<input type ="text" id="t_ticket" value ="Type Ticket Number Here"/>
+<button id="btnOneId">Click To Get Ticket Information</button>
+<p id="p_retrieveOneId"> Ticket Info Goes Here</p>
+</div>
+
+
+
+
+
+
+
+
+<table width="100%" class="table table-bordered table-hover" id="_addFiveTable">
+<thead>
+  <tr>
+    <th>Guest Name</th>
+    <th>Item Name</th> 
+    <th>Amount Left To Pay</th>
+    <th>Loan Amount</th>
+    <th>Amount Paid</th>
+  </tr>
+</thead>
+<tbody>  
+  <tr>
+    <td contenteditable="true">Editable</td>
+    <td contenteditable="true">&nbsp;</td>
+    <td contenteditable="true">&nbsp;</td>
+    <td contenteditable="true">&nbsp;</td>
+    <td contenteditable="true">&nbsp;</td>
+  </tr>
+</tbody>
+</table>
+
+
+
+
+<!--<div id="retrieveOneId">
+<input type ="text" id="t_ticket" value ="type ticket here"/>
+<button id="btnOneId">Click to get Ticket Information</button>
+<p id="p_retrieveOneId"> Ticket Number Goes Here</p>
+</div>-->
+
+<script
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+
+
+
+<script>
+$(document).ready( function() {
+alert("running script");
+
+$("#btnOneId").click(function() {
+	alert("clicked");
+	var inputId = document.getElementById("t_ticket").value;
+	var theUrl ="http://localhost:8080/webserv1/resources/ws2/tickets/"+inputId;
+	$.ajax ( {
+		url: theUrl,
+		type: "GET",
+		dataType: "text",
+		success: function (result) {
+			alert("success");
+			$("#p_retrieveOneId").html(result); },
+		error: function(xhr) {
+			alert("error");
+			$("#p_retrieveOneId").html("Error:" + xhr.status+ " "
+				+xhr.statusText);}
+	} );
+});
+
+});
+</script>	

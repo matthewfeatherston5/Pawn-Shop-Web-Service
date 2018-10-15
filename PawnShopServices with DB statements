@@ -1,0 +1,115 @@
+package com.pawnshop;
+import javax.ws.rs.QueryParam;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+
+@Path("ws2")
+public class PawnShopServices
+{
+	
+	//This will end up testing the select * from pawnTicket Db
+	@Path("/tickets")
+	@GET
+	@Produces("text/plain")
+	public String getTickets()
+	{
+		return "tickets 1, 2, 3";
+	}
+
+
+	//This will test just pulling up one pawn ticket from the Db
+	@Path("tickets/{id}")
+	@GET 
+	@Produces("text/plain")
+	public String getTicketById(@PathParam("id")String theId) throws SQLException,ClassNotFoundException
+	{
+		int intId = 0;
+		String theIng = "";
+		
+		//Converting url string into an int
+		try
+		{
+			intId = Integer.parseInt(theId);
+		}
+		catch(NumberFormatException ne)
+		{
+			intId = 1;
+		}
+
+		//Getting Ticket from DB
+		//Protocol String "<protocol>://<domainName>:<portNumber>/<databaseName>
+		String connectStr ="jdbc:mysql://localhost:3306/pawnticketdb";
+
+		//DB username
+		String username = "root";
+
+		//database password
+		String password="password";
+
+		//Driver for Java class to connect to pawnticketdb
+		String driver = "com.mysql.jdbc.Driver";
+		Class.forName(driver);
+		
+		//Creaating connection to DB
+		Connection con = DriverManager.getConnection(
+			connectStr, username, password);
+		
+
+		//Creating  a statement object to be executed on pawnticketdb
+		Statement stmt = con.createStatement();
+
+		//Do a bd query
+		ResultSet rs = stmt.executeQuery("SELECT item, ticketID FROM pawnticket WHERE ticketId="+intId);
+
+		//Showing results from pawnticketdb
+		String result ="";
+
+		while(rs.next())
+		{
+			String theID       = rs.getString("ticketID");
+			String theItemName = rs.getString("item");
+			result += "ID: " + theID + "Item: " + theItemName;
+		}
+		
+
+
+
+		//if(intId ==2)
+		//{
+			//theIng = "Ticet 2";
+		//}
+		//else
+		//{
+			//theIng = "Some other ticket";
+		//}
+		//return theIng;
+		return result;
+	}
+
+	//This will pull up tickets with a certain item they have in common
+	@Path("/tickets/item")
+	@GET
+	@Produces("text/plain")
+	public String getItem(@QueryParam("name") String theItem)
+	{
+		String theIng="";
+		//Get tickets with the item being searched from DB
+		if(theItem.equals("bike"))
+		{
+			theIng = "Ticket Ids with Bikes 12, 17,19";
+		}
+		else 
+		{
+			theIng = "Some other item";
+		}
+		return theIng;
+	}
+}

@@ -1,0 +1,49 @@
+//creating DB and Table
+create database pawnTicketDB;
+
+
+
+use sys;
+
+
+
+create table PawnTicket
+
+(
+		
+	ticketID int,
+		
+
+	item varchar(100)
+),
+	pawnValue double,
+	itemLoanAmount double,
+	amountPaidOff double,
+	datePawned double 
+	
+
+);
+
+//Inserting values into PawnTicket Table
+insert into PawnTicket (ticketID, item)
+	
+	values ('item1', 'bike');
+
+insert into PawnTicket(ticketID, item) 
+	
+	values('item2', 'tv');
+
+insert into PawnTicket(ticketID, item)
+	
+	values('item3', 'computer');
+
+//Adding a column to existing data
+ALTER TABLE pawnticket 
+ADD pawnValue;
+
+
+//updating values
+UPDATE pawnticket
+SET pawnValue = 2.00
+WHERE ticketID = 3;
+

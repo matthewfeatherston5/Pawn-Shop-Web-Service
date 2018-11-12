@@ -1,0 +1,406 @@
+<h2>Pawn Shop Empolyee Page</h2>
+
+<body>
+<h2> Get Ticket By ID </h2>
+<div id="retrieveOneId">
+<input type ="text" id="t_ticket" value ="Type Ticket Number Here"/>
+<button id="btnOneId">Click To Get Ticket Information</button>
+<p id="p_retrieveOneId"> Ticket Info Goes Here</p>
+</div>
+
+<!--<div id="retrieveOneId1">
+<h2> Remove Ticket By ID </h2>
+<input type ="text" id="t_ticket1" value ="Type Ticket Number Here"/>
+<button id="btnOneId1">Click To Romve Ticket Information</button>
+<p id="p_retrieveOneId1"> Ticket Info Goes Here</p>
+</div>-->
+
+
+
+
+
+<style>
+body
+{
+	background-color:#00FF00
+}
+</style>
+
+
+
+<div id="retrieveAllId">
+<h2> Get all Tickets</h2>
+<button id="btnAllItemsId">Click To Get All Tickets </button>
+<p id="p_retrieveAllId"> Ticket Info Goes Here</p>
+</div>
+
+
+
+<!--var testingVar = "Hello, World"-->
+
+
+
+
+<!--<div id="tableDiv">
+<table width="100%" class="table table-bordered table-hover" id="itemTable">
+<thead>
+  <tr>
+    <th>Guest Name</th>
+    <th>Item Name</th> 
+    <th>Amount Left To Pay</th>
+    <th>Loan Amount</th>
+    <th>Amount Paid</th>
+  </tr>
+</thead>
+<tbody>  
+  <tr>
+    <td contenteditable="true">Editable</td>
+    <td contenteditable="true">testingVar </td>
+    <td contenteditable="true"></td>
+    <td contenteditable="true"></td>
+    <td contenteditable="true"></td>
+  </tr>
+</tbody>
+
+<!--<script type ="text/javascript">
+var k = '<tbody>'
+for(i = 0; i<-->
+
+
+
+
+<!--</table>
+<button id="submitBtn">Click To Submit Information</button>
+</div>-->
+
+
+<!--<div id="retrieveOneId">
+<input type ="text" id="t_ticket" value ="type ticket here"/>
+<button id="btnOneId">Click to get Ticket Information</button>
+<p id="p_retrieveOneId"> Ticket Number Goes Here</p>
+</div>-->
+
+</div>
+<div id="creatIng">
+	<h4> Add an Item to A Ticket</h4>
+	<form id="f_createIng">
+		<label for="t_ingItemIDCreate"> Ticket ID: </label>
+		<input type = "text" id="t_ingItemIDCreate" value="Type Item ID Here" />
+		<label for="t_ingItemNameCreate"> Item Name:</label>
+		<input type = "text" id="t_ingItemNameCreate" value="Type Item Name Here"/>
+		<label for="t_ingItemPawnedValueCreate">Pawned Value:</label>
+		<input for="t_ingItemPawnedValueCreate" id="t_ingItemPawnedValueCreate" value="Type Pawned Value Here"/>
+		<label for="t_ingItemLoanAmountCreate">Loan Amount:</label>
+		<input for="t_ingItemLoanAmountCreate" id="t_ingItemLoanAmountCreate" value="Type Item Loan Amount Here"/>
+		<label for="t_ingItemAmtPaidCreate" >Amount Paid Off:</label>
+		<input for="t_ingItemAmtPaidCreate" id="t_ingItemAmtPaidCreate" value="Type Amount Already Paidoff Here"/>
+		<label for="t_ingItemDueDate"> Due Date:</label>
+		<input type = "text" id="t_ingItemDueDate" value="Date Due"/>	
+		<button id="btnCreateIng">Click to Add this Item</button>
+	</form>
+	<!--<p id="p_createIng"> Created Item goes here</p>-->
+</div>
+
+
+<!--</div>
+<div id="creatIng1">
+	<h4> Update an Item to A Ticket</h4>
+	<form id="f_createIng">
+		<label for="t_ingItemIDCreate"> Ticket ID: </label>
+		<input type = "text" id="t_ingItemIDCreate1" value="Type Item ID Here" />
+		<label for="t_ingItemNameCreate"> Item Name:</label>
+		<input type = "text" id="t_ingItemNameCreate1" value="Type Item Name Here"/>
+		<label for="t_ingItemPawnedValueCreate">Pawned Value:</label>
+		<input for="t_ingItemPawnedValueCreate" id="t_ingItemPawnedValueCreate1" value="Type Pawned Value Here"/>
+		<label for="t_ingItemLoanAmountCreate">Loan Amount:</label>
+		<input for="t_ingItemLoanAmountCreate" id="t_ingItemLoanAmountCreate1" value="Type Item Loan Amount Here"/>
+		<label for="t_ingItemAmtPaidCreate" >Amount Paid Off:</label>
+		<input for="t_ingItemAmtPaidCreate" id="t_ingItemAmtPaidCreate1" value="Type Amount Already Paidoff Here"/>
+		<label for="t_ingItemDueDate"> Due Date:</label>
+		<input type = "text" id="t_ingItemDueDate1" value="Date Due"/>	
+		<button id="btnCreateIng1">Click to Add this Item</button>
+	</form>
+	<p id="p_createIng"> Created Item goes here</p>
+</div>-->
+
+
+
+
+
+<script
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+
+
+
+<script>
+$(document).ready( function() {
+//alert("running script");
+
+$("#btnOneId").click(function() {
+	//alert("clicked");
+	var inputId = document.getElementById("t_ticket").value;
+	var theUrl ="http://localhost:8080/webserv1/resources/ws2/tickets/"+inputId;
+	$.ajax ( {
+		url: theUrl,
+		type: "GET",
+		dataType: "text",
+		success: function (result) {
+			alert("success");
+			var ingArray = JSON.parse(result);
+			//alert(ingArray);			
+			var output = "<h3>Pawn Ticket</h3>";
+			output += "<ul>";
+			for(var i=0; i<ingArray.length;i++)
+			{
+				output += "<li>"+"The Item ID:" + ingArray[i].itemID + "( "+"The Item Name:"+ ingArray[i].itemName
+				+",The Pawned Value:"+ ingArray[i].itemPawnedValue + ", The Item Loan Amount:"+ ingArray[i].itemLoanAmt+",The Amount Paind Amount:"+ ingArray[i].itemAmtPaid+")"+ "</li>";
+			}
+			output += "</ul>";
+			//alert(output);
+			$("#p_retrieveOneId").html(output); },
+		error: function(xhr) {
+			alert("error");
+			$("#p_retrieveOneId").html("Error:" + xhr.status+ " "
+				+xhr.statusText);}
+	} );
+});
+
+});
+</script>
+
+
+<script>
+$(document).ready( function() {
+//alert("running script");
+
+$("#btnOneId1").click(function() {
+	//alert("clicked");
+	var inputId = document.getElementById("t_ticket").value;
+	var theUrl ="http://localhost:8080/webserv1/resources/ws2/tickets/"+inputId;
+	$.ajax ( {
+		url: theUrl,
+		type: "DELETE",
+		dataType: "text",
+		success: function (result) {
+			alert("success");
+			var ingArray = JSON.parse(result);
+			//alert(ingArray);			
+			var output = "<h3>Pawn Ticket</h3>";
+			output += "<ul>";
+			for(var i=0; i<ingArray.length;i++)
+			{
+				output += "<li>"+"The Item ID:" + ingArray[i].itemID + "( "+"The Item Name:"+ ingArray[i].itemName
+				+",The Pawned Value:"+ ingArray[i].itemPawnedValue + ", The Item Loan Amount:"+ ingArray[i].itemLoanAmt+",The Amount Paind Amount:"+ ingArray[i].itemAmtPaid+")"+ "</li>";
+			}
+			output += "</ul>";
+			//alert(output);
+			$("#p_retrieveOneId").html(output); },
+		error: function(xhr) {
+			alert("error");
+			$("#p_retrieveOneId").html("Error:" + xhr.status+ " "
+				+xhr.statusText);}
+	} );
+});
+
+});
+</script>
+
+
+
+
+<script>
+$(document).ready( function() {
+//alert("running script");
+
+$("#btnAllItemsId").click(function() {
+	//alert("clicked");
+	var theUrl ="http://localhost:8080/webserv1/resources/ws2/tickets";
+	$.ajax ( {
+		url: theUrl,
+		type: "GET",
+		dataType: "text",
+		success: function (result) {
+			alert("success");
+			var ingArray = JSON.parse(result);
+			//alert(ingArray);			
+			var output = "<h3>All Pawn Tickets</h3>";
+			output += "<ul>";
+			for(var i=0; i<ingArray.length;i++)
+			{
+				output += "<li>" +"The Item ID: " +ingArray[i].itemID + "( The Item Name: "+ ingArray[i].itemName
+				+", The Item Pawned Value:"+ ingArray[i].itemPawnedValue + ", The Item Loan Amount:"+ ingArray[i].itemLoanAmt+", The Item Amount Paid:"+ ingArray[i].itemAmtPaid+")"+ "</li>";
+			}
+			output += "</ul>";
+			//alert(output);
+			$("#p_retrieveAllId").html(output); },
+		error: function(xhr) {
+			alert("error");
+			$("#p_retrieveAllId").html("Error:" + xhr.status+ " "
+				+xhr.statusText);}
+	} );
+});
+
+});
+</script>
+
+
+
+
+	
+
+<script>
+$(document).ready( function() {
+//alert("running script");
+
+$("#submitBtn").click(function() {
+
+	//alert("clicked");
+	<!-- gets table -->
+	var oTable = document.getElementById('itemTable');
+	
+	<!-- gets rows of table -->
+	var rowLength = oTable.rows.length;
+
+	<!-- loops through rows -->
+	for(i= 0; i<rowLength ; i++)
+	{
+		<!-- geting cells of current row -->
+		var oCells = oTable.rows.item(i).cells;
+		var counter = 0;
+		var listedItems = 5;
+
+		<!-- gets amount of cells of current row -->
+		var cellLength = oCells.length;
+
+		<!-- llops through each cell in current row -->
+		for(var j = 0; j< cellLength; j++){
+			<!-- cell info here -->
+
+		if(counter=listedItems){
+		var cellVal = oCells.item(j).innerHTML;
+		alert(cellVal);
+		}
+		else
+		{
+			counter++;
+		}
+	}
+	}
+	});
+	});
+</script>
+	
+
+<script>
+$("#btnCreateIng").click(function(){
+	//alert("clicked");
+	var newID              =document.getElementById("t_ingItemIDCreate").value;
+	var newItemName        =document.getElementById("t_ingItemNameCreate").value;
+	var newItemPawnedValue =document.getElementById("t_ingItemPawnedValueCreate").value;
+	var newItemLoanAmount  =document.getElementById("t_ingItemLoanAmountCreate").value;
+	var newItemAmtPaid     =document.getElementById("t_ingItemAmtPaidCreate").value;
+	var newDueDate         =document.getElementById("t_ingItemDueDate").value;
+	var theData            = "Id="+newID+"&"+"itemName="+newItemName+"&"+"itemPawnedValue=" + newItemPawnedValue+"&"+ "itemLoanAmount=" + newItemLoanAmount+"&" +"amountPaidOff="+ newItemAmtPaid+"&"+ "newDate="+ newDueDate;
+	//alert("Sending: "+ theData);
+	var theUrl = "http://localhost:8080/webserv1/resources/ws2/tickets/item";
+	$.ajax( {
+		url: theUrl,
+		type: "POST", 
+		dataType: "text",
+		contentType: "application/x-www-form-urlencoded",
+		data: theData,
+		
+		success:
+			function(result,status,jqxhr){
+				alert("success: " + status);
+				
+				var ingArray = JSON.parse(result);
+				//alert(ingArray);
+				var output="<h3> Just added</h3>";
+				output += "<ul>";
+				
+				for(var i=0; i<ingArray.length; i++)
+				{
+					output += "<li>" +"The Items ID:"+ ingArray[i].itemID + ", The Item Name: "+ ingArray[i].itemName
+				+", The Pawn Value:"+ ingArray[i].itemPawnedValue + ", The Item Loan Amount:"+ ingArray[i].itemLoanAmt+", The Paid Amount"+ ingArray[i].itemAmtPaid+", The Due Date:"+ingArray[i].itemDueDate+")"+ "</li>";
+				}
+				output += "</ul>";
+				//alert(output);
+		
+				$("#p_createIng").html(output);
+			},
+		error:
+			function(xhr, status, errorThrown, result){
+				
+				
+			},
+} );
+});
+
+</script>
+
+
+<script>
+$("#btnCreateIng1").click(function(){
+	//alert("clicked");
+	var newID              =document.getElementById("t_ingItemIDCreate1").value;
+	var newItemName        =document.getElementById("t_ingItemNameCreate1").value;
+	var newItemPawnedValue =document.getElementById("t_ingItemPawnedValueCreate1").value;
+	var newItemLoanAmount  =document.getElementById("t_ingItemLoanAmountCreate1").value;
+	var newItemAmtPaid     =document.getElementById("t_ingItemAmtPaidCreate1").value;
+	var newDueDate         =document.getElementById("t_ingItemDueDate1").value;
+	var theData            = "Id="+newID+"&"+"itemName="+newItemName+"&"+"itemPawnedValue=" + newItemPawnedValue+"&"+ "itemLoanAmount=" + newItemLoanAmount+"&" +"amountPaidOff="+ newItemAmtPaid+"&"+ "newDate="+ newDueDate;
+	//alert("Sending: "+ theData);
+	var theUrl = "http://localhost:8080/webserv1/resources/ws2/tickets/item";
+	$.ajax( {
+		url: theUrl,
+		type: "POST", 
+		dataType: "text",
+		contentType: "application/x-www-form-urlencoded",
+		data: theData,
+		
+		success:
+			function(result,status,jqxhr){
+				alert("success: " + status);
+				
+				var ingArray = JSON.parse(result);
+				//alert(ingArray);
+				var output="<h3> Just added</h3>";
+				output += "<ul>";
+				
+				for(var i=0; i<ingArray.length; i++)
+				{
+					output += "<li>" +"The Items ID:"+ ingArray[i].itemID + ", The Item Name: "+ ingArray[i].itemName
+				+", The Pawn Value:"+ ingArray[i].itemPawnedValue + ", The Item Loan Amount:"+ ingArray[i].itemLoanAmt+", The Paid Amount"+ ingArray[i].itemAmtPaid+", The Due Date:"+ingArray[i].itemDueDate+")"+ "</li>";
+				}
+				output += "</ul>";
+				//alert(output);
+		
+				$("#p_createIng").html(output);
+			},
+		error:
+			function(xhr, status, errorThrown, result){
+				
+				
+			},
+} );
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<a href = "EmployeeP.jsp">Employee Home</a>
+</body>
+
+

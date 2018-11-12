@@ -365,5 +365,84 @@ public class PawnShopServices
 					
 		//For debugging 
 		}
+
+
+
+	@Path("tickets/{id}")
+	@GET 
+	@Produces("text/plain")
+	public String updateTicketById(MultivaluedMap<String,String> fromFields,@PathParam("id")String theId) throws SQLException,ClassNotFoundException
+	{
+		int intId = 0;
+		String theIng = "";
+		
+		//Converting url string into an int
+		try
+		{
+			intId = Integer.parseInt(theId);
+		}
+		catch(NumberFormatException ne)
+		{
+			intId = 1;
+		}
+
+		//Creating item from ID
+		//Item choosenItem = new Item(intId);
+		//allItems.add(choosenItem);
+		
+
+		//Getting Ticket from DB
+		//Protocol String "<protocol>://<domainName>:<portNumber>/<databaseName>
+		String connectStr ="jdbc:mysql://localhost:3306/pawnticketdb";
+
+		//DB username
+		String username = "root";
+
+		//database password
+		String password="password";
+
+		//Driver for Java class to connect to pawnticketdb
+		String driver = "com.mysql.jdbc.Driver";
+		Class.forName(driver);
+		
+		//Creaating connection to DB
+		Connection con = DriverManager.getConnection(
+			connectStr, username, password);
+		
+
+
+		//Getting Info from Fields 
+		//Getting information from the add item fields 
+		String newItemID         = fromFields.getFirst("Id");
+		String newItemName       = fromFields.getFirst("itemName");
+		String newItemPawnedAmount = fromFields.getFirst("itemPawnedValue");
+		String newItemLoanAmount   = fromFields.getFirst("itemLoanAmount");
+		String newItemAmtPaid     = fromFields.getFirst("amountPaidOff");
+		String newDueDate         = fromFields.getFirst("newDate");
+
+
+		//Parsing some data
+		Double itemLoanAmountDouble   = Double.parseDouble(newItemLoanAmount);
+		Double itemAmtPaidDouble      = Double.parseDouble(newItemAmtPaid);
+		int    newItemIDInt           = Integer.parseInt(newItemID);
+		Double itemItemPawnAmountDouble   = Double.parseDouble(newItemPawnedAmount);
+		
+		//SQL String 
+		String sqlStr = "UPDATE pawnticket SET  ticketID = newItemIDInt, itemName=newItemName, pawnVaule = newItemPawnAmountDouble,itemLoanAmount=itemLoanAmountDouble,amountPaidOff=itemAmtPaidDouble,datePawned=newDueDate WHERE ticketId=?";
+
+		
+	         PreparedStatement createStmt = con.prepareStatement(sqlStr);
+		int result = createStmt.executeUpdate();
+		String resultStr = "Your result was : " + result;
+		//itemLoanAmount = newItemLoanAmount, amountPaidOff = newItemAmtPaid, datePawned = newDueDate WHERE ticketId=?"); 		
+//line 100
+		//Do a bd query
+		//ResultSet rs = stmt.executeQuery("SELECT item, ticketID FROM pawnticket WHERE ticketId="+intId);
+		//stmt.setString(1,theId);//ticketId);
+		//ResultSet rs = stmt.executeQuery();
+
+		//Return
+		return resultStr;
+	}
 		
 }
